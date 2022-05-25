@@ -1,22 +1,19 @@
 import Button from '../Button/Button';
 import TextInput from '../TextInput/TextInput';
 import styles from './PickCity.module.scss';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 const PickCity = (props) => {
   const [city, setCity] = useState('');
 
-  const cityChanger = useCallback(
-    (e) => {
-      e.preventDefault();
-      props.onSubmit(city);
-      setCity('');
-    },
-    [city, props]
-  );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.action(city);
+    setCity('');
+  };
 
   return (
-    <form className={styles.pickCityForm} onSubmit={cityChanger}>
+    <form className={styles.pickCityForm} onSubmit={handleSubmit}>
       <label>
         <TextInput
           placeholder="Enter city name...."
